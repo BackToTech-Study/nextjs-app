@@ -1,0 +1,13 @@
+version: "3"
+services:
+  mysql:
+    image: "mysql"
+    environment:
+      MYSQL_DATABASE: posts
+      MYSQL_ROOT_PASSWORD: mypassword
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - "./.data/db:/var/lib/mysql"
