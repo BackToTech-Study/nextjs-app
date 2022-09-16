@@ -10,7 +10,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Relation {
+  id String @id @default(uuid())
+  tests Test[]
+}
+
 model Test {
   id String @id @default(uuid())
   name String
+  relationId String
+  relation Relation @relation(references: [id], fields: [relationId])
 }

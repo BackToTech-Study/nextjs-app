@@ -1,4 +1,5 @@
 import { Test } from "@prisma/client";
+import { StatusCodes } from "http-status-codes";
 
 import nc from "next-connect";
 import prisma from "../../../lib/server/prisma";
@@ -13,7 +14,7 @@ const getAll = async (
   const tests = await prisma.test.findMany();
   prisma.$disconnect();
 
-  res.status(200).json({ status: true, tests });
+  res.status(StatusCodes.OK).json({ status: true, tests });
 };
 
 export type CreateTestRequestPayload = Omit<Test, "id">;
@@ -27,7 +28,7 @@ const create = async (
     data: req.body,
   });
 
-  res.status(200).json({ status: true, test });
+  res.status(StatusCodes.OK).json({ status: true, test });
 };
 
 export default nc().get(getAll).post(create);
